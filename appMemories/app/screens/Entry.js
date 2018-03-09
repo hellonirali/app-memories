@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Button, Text } from 'react-native';
+// import { connect } from 'react-redux';
+import { addMemory } from '../store/memories';
 
 import t from 'tcomb-form-native'; // 0.6.9
 
@@ -39,19 +41,22 @@ const formStyles = {
 const options = {
   fields: {
     title: {
-      error: 'Title required'
+      error: 'Title required',
+      placeholder: 'Subject'
     },
     mood: {
-      error: 'Mood required'
+      error: 'Mood required',
+      placeholder: 'Rate (Sad) 1-10 (Happy)'
     },
     entry: {
       error: 'Entry required',
+      placeholder: 'Describe your memory'
     },
   },
   stylesheet: formStyles,
 };
 
-export default class App extends Component {
+export default class Entry extends Component {
   handleSubmit = () => {
     const value = this._form.getValue();
     console.log('value: ', value);
@@ -83,3 +88,21 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
 });
+
+// const mapState = null;
+// const mapDispatch = (dispatch, ownProps) => {
+//   return {
+//     submitChange(event) {
+//       dispatch(
+//         addMemory({
+//           date: this._form.getValue().date,
+//           entry: this._form.getValue().entry,
+//           mood: this._form.getValue().mood,
+//           title: this._form.getValue().title
+//         })
+//       )
+//     }
+//   }
+// }
+
+// export default connect(mapState, mapDispatch)(Entry)
