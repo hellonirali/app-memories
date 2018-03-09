@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button, Text } from 'react-native';
 
 import t from 'tcomb-form-native'; // 0.6.9
 
@@ -8,7 +8,7 @@ const Form = t.form.Form;
 const User = t.struct({
   date: t.Date,
   title: t.String,
-  mood: t.Number,
+  mood: t.String,
   entry: t.String,
 });
 
@@ -21,7 +21,7 @@ const formStyles = {
   },
   controlLabel: {
     normal: {
-      color: '#',
+      color: 'black',
       fontSize: 18,
       marginBottom: 7,
       fontWeight: '600'
@@ -67,7 +67,7 @@ export default class App extends Component {
           options={options}
         />
         <Button
-          title="+ Add Memory"
+          title="Add Memory"
           onPress={this.handleSubmit}
         />
       </View>
