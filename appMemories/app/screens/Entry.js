@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Button, Text } from 'react-native';
-// import { connect } from 'react-redux';
-import { addMemory } from '../store/memories';
-
-import t from 'tcomb-form-native'; // 0.6.9
+import axios from 'axios';
+import t from 'tcomb-form-native';
 
 const Form = t.form.Form;
 
-const User = t.struct({
+const Memory = t.struct({
   date: t.Date,
   title: t.String,
   mood: t.String,
@@ -46,7 +44,7 @@ const options = {
     },
     mood: {
       error: 'Mood required',
-      placeholder: 'Rate (Sad) 1-10 (Happy)'
+      placeholder: 'How are you feeling?'
     },
     entry: {
       error: 'Entry required',
@@ -57,9 +55,29 @@ const options = {
 };
 
 export default class Entry extends Component {
-  handleSubmit = () => {
-    const value = this._form.getValue();
-    console.log('value: ', value);
+  constructor(props) {
+    super(props);
+    this.state = {
+      memory: {}
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    axios.post('http://localhost:8080/api/memories', {
+      date: this._form.getValue().date,
+      entry: this._form.getValue().entry,
+      mood: this._form.getValue().mood,
+      title: this._form.getValue().title
+    })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
   }
 
   render() {
@@ -68,7 +86,7 @@ export default class Entry extends Component {
       <Text>Add an Entry</Text>
         <Form
           ref={c => this._form = c}
-          type={User}
+          type={Memory}
           options={options}
         />
         <Button
@@ -88,21 +106,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
 });
-
-// const mapState = null;
-// const mapDispatch = (dispatch, ownProps) => {
-//   return {
-//     submitChange(event) {
-//       dispatch(
-//         addMemory({
-//           date: this._form.getValue().date,
-//           entry: this._form.getValue().entry,
-//           mood: this._form.getValue().mood,
-//           title: this._form.getValue().title
-//         })
-//       )
-//     }
-//   }
-// }
-
-// export default connect(mapState, mapDispatch)(Entry)
