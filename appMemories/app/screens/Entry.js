@@ -40,7 +40,7 @@ const options = {
   fields: {
     title: {
       error: 'Title required',
-      placeholder: 'Subject'
+      placeholder: 'Subject',
     },
     mood: {
       error: 'Mood required',
@@ -58,7 +58,7 @@ export default class Entry extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      memory: {}
+      memories: {}
     }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -72,18 +72,15 @@ export default class Entry extends Component {
       title: this._form.getValue().title
     })
     .then(function (response) {
-      console.log(response);
     })
     .catch(function (error) {
       console.log(error);
     });
-
   }
 
   render() {
     return (
       <View style={styles.container}>
-      <Text>Add an Entry</Text>
         <Form
           ref={c => this._form = c}
           type={Memory}
@@ -93,7 +90,7 @@ export default class Entry extends Component {
           title="Add Memory"
           onPress={this.handleSubmit}
         />
-      </View>
+        </View>
     );
   }
 }
@@ -102,7 +99,7 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
     marginTop: 50,
-    padding: 20,
-    backgroundColor: '#ffffff',
+    // padding: 20,
+    // backgroundColor: 'blue',
   },
 });

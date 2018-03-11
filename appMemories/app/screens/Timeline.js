@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, FlatList } from 'react-native';
+import { ScrollView, View, StyleSheet, Text } from 'react-native';
 import { Navbar } from '../components/index';
 import axios from 'axios';
+import { Actions } from 'react-native-router-flux';
 
 export default class Timeline extends Component {
   constructor(props) {
@@ -24,36 +25,64 @@ export default class Timeline extends Component {
 
   render() {
     const memories = this.state.memories;
-    console.log(memories)
+
     return (
-      <View>
-      <Navbar title={'Timeline'} />
-      <FlatList
-        data={[
-          {key: 'Devin'},
-          {key: 'Jackson'},
-          {key: 'James'},
-          {key: 'Joel'},
-          {key: 'John'},
-          {key: 'Jillian'},
-          {key: 'Jimmy'},
-          {key: 'Julie'},
-        ]}
-        renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
-      />
-    </View>
+      <ScrollView>
+      {memories.map(memory => (
+        <View key={memory.id}>
+        <Text style={styles.headTitle}>
+        {memory.title}
+        </Text>
+        <Text />
+
+        <Text style={styles.title}>
+        Date:
+        </Text>
+        <Text style={styles.item}>
+          {memory.date.slice(5, 7)}-{memory.date.slice(8, 10)}-{memory.date.slice(0, 4)}
+        </Text>
+        <Text />
+
+        <Text style={styles.title}>
+          Mood:
+        </Text>
+        <Text style={styles.item}>
+          {memory.mood}
+        </Text>
+        <Text />
+
+        <Text style={styles.title}>
+          Entry:
+        </Text>
+        <Text style={styles.item}>
+          {memory.entry}
+        </Text>
+        <Text />
+
+        <View
+          style={{
+            borderBottomColor: 'black',
+            borderBottomWidth: 1,
+          }}
+        />
+        </View>
+      ))}
+    </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 22
-   },
    item: {
-     padding: 10,
      fontSize: 18,
-     height: 44,
    },
+   title: {
+     fontSize: 18,
+     fontWeight: 'bold'
+   },
+   headTitle: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold'
+   }
 });
