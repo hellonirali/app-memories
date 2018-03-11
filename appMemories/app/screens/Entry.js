@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Button, Text } from 'react-native';
+import { View, StyleSheet, Button, Text, ImageBackground } from 'react-native';
 import axios from 'axios';
 import t from 'tcomb-form-native';
 import { Actions } from 'react-native-router-flux';
@@ -85,14 +85,25 @@ export default class Entry extends Component {
 
   render() {
     return (
+      <ImageBackground
+    style={{
+      flex: 1,
+      position: 'absolute',
+      width: '100%',
+      height: '100%',
+      // justifyContent: 'center',
+    }}
+    source={require('./entryBackground.png')}
+    >
       <View style={styles.container}>
+      <Text />
         <Form
           ref={c => this._form = c}
           type={Memory}
           options={options}
         />
         <Button
-          title="Add Memory"
+          title="Add Reflection"
           onPress={this.handleSubmit}
         />
         <Button
@@ -100,6 +111,7 @@ export default class Entry extends Component {
         onPress={this.timelineScreen}
       />
         </View>
+        </ImageBackground>
     );
   }
 }
@@ -111,8 +123,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // marginTop: 50,
     // padding: 20,
-    backgroundColor: '#d4dfea',
-    color: '#4f6b8a'
+    // backgroundColor: '#e9f3f6',
   },
   title: {
     fontSize: 34,

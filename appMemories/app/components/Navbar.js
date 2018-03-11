@@ -1,21 +1,20 @@
-import React, { Component } from 'react';
-import { Container, Header, Left, Body, Right, Button, Title, Subtitle } from 'native-base';
-export default class Navbar extends Component {
-  render() {
-    return (
-      <Container>
-        <Header>
-          <Left>
-            <Button transparent>
-            Back
-            </Button>
-          </Left>
-          <Body>
-            <Title>{this.props.title}</Title>
-          </Body>
-          <Right />
-        </Header>
-      </Container>
-    );
-  }
-}
+import { View, StatusBar } from 'react-native';
+ import React, { Component } from 'react';
+
+ export default class Navbar extends Component {
+   render() {
+     return (
+ <View style={styles.backgroundStyle}>
+       <StatusBar />
+       <View style={{ flexDirection: 'row' }}>
+     </View>
+ </View>
+     );
+   }
+
+ }
+ const styles = {
+   backgroundStyle: {
+     backgroundColor: 'transparent'
+   }
+ };
