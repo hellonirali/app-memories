@@ -1,3 +1,4 @@
+require('ReactFeatureFlags').warnAboutDeprecatedLifecycles = false;
 import React from 'react';
 import { AppRegistry, View } from 'react-native';
 import AppContainer from './AppContainer';
@@ -23,5 +24,7 @@ import AppContainer from './AppContainer';
 //     <AppContainer />
 //   </View>
 // );
+
+console.ignoredYellowBox = ['Warning:'];
 
 AppRegistry.registerComponent('appMemories', () => AppContainer);

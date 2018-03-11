@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Button, Text } from 'react-native';
 import axios from 'axios';
 import t from 'tcomb-form-native';
+import { Actions } from 'react-native-router-flux';
 
 const Form = t.form.Form;
 
@@ -61,6 +62,7 @@ export default class Entry extends Component {
       memories: {}
     }
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.timelineScreen = this.timelineScreen.bind(this)
   }
 
   handleSubmit = (event) => {
@@ -72,11 +74,14 @@ export default class Entry extends Component {
       title: this._form.getValue().title
     })
     .then(function (response) {
+      Actions.timeline()
     })
     .catch(function (error) {
       console.log(error);
     });
   }
+
+  timelineScreen = () => Actions.timeline()
 
   render() {
     return (
@@ -90,6 +95,10 @@ export default class Entry extends Component {
           title="Add Memory"
           onPress={this.handleSubmit}
         />
+        <Button
+        title="Timeline"
+        onPress={this.timelineScreen}
+      />
         </View>
     );
   }
@@ -98,8 +107,54 @@ export default class Entry extends Component {
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    marginTop: 50,
+    // flex: 1,
+    alignItems: 'center',
+    // marginTop: 50,
     // padding: 20,
-    // backgroundColor: 'blue',
+    backgroundColor: '#d4dfea',
+    color: '#4f6b8a'
   },
+  title: {
+    fontSize: 34,
+    textAlign: 'center',
+    margin: 10,
+    color: '#4e6b89',
+    fontWeight: 'bold',
+    paddingTop: 60
+    // textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    // textShadowOffset: {width: -1, height: 1},
+    // textShadowRadius: 10
+  }
 });
+
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     justifyContent: 'flex-start',
+//     alignItems: 'center',
+//     paddingTop: 60
+//     // backgroundColor: '#FF8200',
+//   },
+//   welcome: {
+//     fontSize: 20,
+//     textAlign: 'center',
+//     margin: 10,
+//     color: '#537a7a',
+//     fontFamily: 'Avenir-Light',
+//     textShadowColor: 'rgba(255, 255, 255, 0.75)',
+//     textShadowOffset: {width: -1, height: 1},
+//     textShadowRadius: 10
+//   },
+//   title: {
+//     fontSize: 34,
+//     textAlign: 'center',
+//     margin: 10,
+//     color: '#537a7a',
+//     fontWeight: 'bold',
+//     fontFamily: 'Georgia'
+//     // textShadowColor: 'rgba(0, 0, 0, 0.75)',
+//     // textShadowOffset: {width: -1, height: 1},
+//     // textShadowRadius: 10
+//   }
+// });

@@ -28,6 +28,7 @@ export default class Timeline extends Component {
 
     return (
       <ScrollView>
+      <View style={styles.container}>
       {memories.map(memory => (
         <View key={memory.id}>
         <Text style={styles.headTitle}>
@@ -67,12 +68,19 @@ export default class Timeline extends Component {
         />
         </View>
       ))}
+      </View>
     </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    // marginTop: 50,
+    // padding: 20,
+    // backgroundColor: 'blue',
+  },
    item: {
      fontSize: 18,
    },
