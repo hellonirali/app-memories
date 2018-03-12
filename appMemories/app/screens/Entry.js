@@ -170,12 +170,17 @@
 // //   }
 // // });
 
+
+// --------
+
+
 import React, { Component } from 'react';
-import { Container, Header, Content, Form, Item, Text, Input, Label, Button } from 'native-base';
-import { View, StyleSheet, ImageBackground } from 'react-native';
+import { Container, Content, Footer, FooterTab, Form, Item, Text, Input, Label, Button } from 'native-base';
+import { View, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import t from 'tcomb-form-native';
 import { Actions } from 'react-native-router-flux';
+import DateTimePicker from 'react-native-modal-datetime-picker';
 
 
 export default class Entry extends Component {
@@ -185,7 +190,9 @@ export default class Entry extends Component {
       date: '',
       title: '',
       mood: '',
-      entry: ''
+      entry: '',
+      isDateTimePickerVisible: false,
+      showDate: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.timelineScreen = this.timelineScreen.bind(this);
@@ -204,15 +211,16 @@ export default class Entry extends Component {
         date: '',
         title: '',
         mood: '',
-        entry: ''
+        entry: '',
+        isDateTimePickerVisible: false,
+        showDate: false
       });
-      this.dateInput._root.clear();
       this.titleInput._root.clear();
       this.moodInput._root.clear();
       this.entryInput._root.clear();
     })
     .then(function (response) {
-      Actions.timeline();
+      Actions.timeline()
     })
     .catch(function (error) {
       console.log(error);
@@ -221,6 +229,16 @@ export default class Entry extends Component {
 
   timelineScreen() {
     Actions.timeline() }
+
+  _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+
+  _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+
+  _handleDatePicked = (date) => {
+    console.log('A date has been picked: ', date);
+    this.setState({date: date, showDate: true})
+    this._hideDateTimePicker();
+  };
 
   render() {
     return (
@@ -236,12 +254,21 @@ export default class Entry extends Component {
         <Container>
           <Content>
             <Form>
-              <Item floatingLabel>
-                <Label>Date</Label>
-                <Input
-                getRef={input => { this.dateInput = input; }}
-                onChangeText={(text) => this.setState({date: text})} value={this.state.date} />
-              </Item>
+
+              <View style={{ flex: 1}}>
+
+                <Button transparent dark onPress={this._showDateTimePicker}>
+                  <Text style={{ color: '#' }}>Select Date</Text>
+                </Button>
+
+                <DateTimePicker
+                  isVisible={this.state.isDateTimePickerVisible}
+                  onConfirm={this._handleDatePicked}
+                  onCancel={this._hideDateTimePicker}
+                />
+                {this.state.showDate && <Text style={{ paddingLeft: 20}}>{this.state.date.toString().slice(0,16)}</Text>}
+              </View>
+
 
               <Item floatingLabel>
                 <Label>Title</Label>
@@ -269,6 +296,7 @@ export default class Entry extends Component {
               </Button>
               </View>
             </Form>
+            <Text />
             <Text />
             <View style={{ paddingLeft: 130 }}>
               <Button style={{ backgroundColor: '#2b5451' }} onPress={() => Actions.timeline()}>

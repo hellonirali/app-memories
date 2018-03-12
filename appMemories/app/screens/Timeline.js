@@ -45,13 +45,13 @@ export default class Timeline extends Component {
             onPress={() => Actions.entry()}>
             <Text>Add Reflection</Text>
           </Button>
-          {memories.map(memory => (
+          {memories.reverse().map(memory => (
             <Card key={memory.id}>
               <CardItem>
               <Left>
-              <Body style={{ justifyContent: 'center' }}>
-                <Text style={{ fontWeight: 'bold', textAlign: 'center', color: '#2b5451' }}>{memory.title}</Text>
-                <Text note style={{ textAlign: 'center' }}>{memory.date.slice(5, 7)}-{memory.date.slice(8, 10)}-{memory.date.slice(0, 4)}</Text>
+              <Body>
+                <Text style={{ fontWeight: 'bold', color: '#2b5451' }}>{memory.title}</Text>
+                <Text note>{memory.date.slice(5, 7)}-{memory.date.slice(8, 10)}-{memory.date.slice(0, 4)}</Text>
                 </Body>
                 </Left>
               </CardItem>
