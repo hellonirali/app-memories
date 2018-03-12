@@ -1,36 +1,37 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  ImageBackground
-} from 'react-native';
+import { StyleSheet, View, ImageBackground } from 'react-native';
 import { Actions } from 'react-native-router-flux';
-import { Container, Header, Content, Button, Text } from 'native-base';
+import { Button, Text } from 'native-base';
 
 const TitlePage = () => {
   return (
     <ImageBackground
-    style={{
-      flex: 1,
-      position: 'absolute',
-      width: '100%',
-      height: '100%',
-      justifyContent: 'center',
-    }}
-    source={require('./background.png')}
-    >
+      style={{
+        flex: 1,
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+      }}
+      source={require('./background.png')}>
       <View style={styles.container}>
-      <Text style={styles.title}>Reflection</Text>
-        <Text style={styles.welcome}>
-          Hello Nirali!{'\n'}How would you like to get started?
-        </Text>
+      <Text style={styles.title}>
+        Reflection
+      </Text>
+      <Text style={styles.welcome}>
+        Hello Nirali!{'\n'}How would you like to get started?
+      </Text>
 
-        <View style={{justifyContent: 'center'}}>
-        <Button style={{ backgroundColor: '#2b5451' }} onPress={() => Actions.entry()}>
+      <View style={{justifyContent: 'center'}}>
+        <Button
+          style={{ backgroundColor: '#2b5451' }}
+          onPress={() => Actions.entry()}>
           <Text>Add Reflection</Text>
         </Button>
         <Text />
-        <Button style={{ backgroundColor: '#2b5451' }} onPress={() => Actions.timeline()}>
+        <Button
+          style={{ backgroundColor: '#2b5451' }}
+          onPress={() => Actions.timeline()}>
           <Text> View Timeline </Text>
         </Button>
       </View>
@@ -46,7 +47,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     paddingTop: 50
-    // backgroundColor: '#FF8200',
   },
   welcome: {
     fontSize: 18,
@@ -65,9 +65,6 @@ const styles = StyleSheet.create({
     color: '#537a7a',
     fontWeight: 'bold',
     fontFamily: 'Georgia'
-    // textShadowColor: 'rgba(0, 0, 0, 0.75)',
-    // textShadowOffset: {width: -1, height: 1},
-    // textShadowRadius: 10
   }
 });
 
