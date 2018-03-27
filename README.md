@@ -4,7 +4,7 @@
 
 ### Instructions
 * Fork and clone repo
-* To install libraries, in the terminal `npm install`
-* To create database, run Postgres and in the terminal `createdb appMemories`
-* To start the back end, in the terminal, navigate to the backend folder and `npm run start:dev`
+* To install libraries, in the terminal, run `npm install`
+* To create database, run Postgres and in the terminal, run `createdb appMemories`
+* To start the back end, in the terminal, navigate to the backend folder and run `npm run start:dev`
 * To start the front-end, open appMemories > ios > appMemories.xcodeproj
